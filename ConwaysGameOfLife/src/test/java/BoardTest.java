@@ -15,7 +15,7 @@ public class BoardTest {
     }
 
     @Test
-    public void testInitializeBoardWithNegativeRowsAndPositiveCols() {
+    public void testInitializeBoardWithNegativeRowsAndPositiveColsShouldThrowError() {
         int rows = -1;
         int cols = 2;
         assertThrows(IllegalArgumentException.class,()->{
@@ -24,7 +24,7 @@ public class BoardTest {
     }
 
     @Test
-    public void testInitializeBoardWithNegativeRowsAndNegativeCols() {
+    public void testInitializeBoardWithNegativeRowsAndNegativeColsShouldThrowError() {
         int rows = -1;
         int cols = -2;
         assertThrows(IllegalArgumentException.class,()->{
@@ -34,7 +34,7 @@ public class BoardTest {
 
 
     @Test
-    public void testInitializeBoardWith0RowsAnd0Cols() {
+    public void testInitializeBoardWith0RowsAnd0ColsShouldThrowError() {
         int rows = 0;
         int cols = 0;
         assertThrows(IllegalArgumentException.class,()->{
