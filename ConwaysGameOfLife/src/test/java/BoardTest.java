@@ -43,7 +43,7 @@ public class BoardTest {
     }
 
     @Test
-    public void testInitializeBoardWith5RowsAnd5ColsAndSeedingPercentage40() {
+    public void testInitializeBoardWith5Rows5ColsAndSeedingPercentage40WillGive10OrLessThan10AliveCells() {
         int rows = 5;
         int cols = 5;
         int seedingPercentage = 40;
