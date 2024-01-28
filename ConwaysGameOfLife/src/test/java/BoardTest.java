@@ -54,5 +54,17 @@ public class BoardTest {
         assertTrue(expectedAliveCells <= board.countAliveCells());
     }
 
+    @Test
+    public void testInitializeBoardWith10Rows10ColsAndSeedingPercentage0ShouldThrowError() {
+        int rows = 10;
+        int cols = 10;
+        int seedingPercentage = 0;
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            Board board = new Board(rows, cols);
+            board.seedRandomCells(seedingPercentage, rows, cols);
+        });
+    }
+
 
 }
