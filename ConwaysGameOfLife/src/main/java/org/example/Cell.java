@@ -14,7 +14,7 @@ public class Cell {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Cell cell)) return false;
-        return isAlive == cell.isAlive;
+        return isAlive == cell.isAlive;  // Directly compare the alive states
     }
 
     @Override
@@ -22,7 +22,7 @@ public class Cell {
         return Objects.hash(isAlive);
     }
 
-    public void changeIsAlive(){
+    public void changeIsAlive() {
         this.isAlive = !isAlive;
     }
 }
