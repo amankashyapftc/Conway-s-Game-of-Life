@@ -66,5 +66,42 @@ public class BoardTest {
         });
     }
 
+    @Test
+    public void testFor1x1GridNextGenerationWillBeAllDead() {
+        Board board = new Board(1, 1);
+        board.seedRandomCells(100, 1, 1);
+        assertEquals(1, board.countAliveCells());
+        board.nextGeneration();
+        assertEquals(0, board.countAliveCells());
+    }
+
+
+        @Test
+        public void testFor2x2GridWithOneAliveCellNextGenerationWillBeAllDead() {
+            Board board = new Board(2, 2);
+            board.seedRandomCells(25, 2, 2);
+            assertEquals(1, board.countAliveCells());
+            board.nextGeneration();
+            assertEquals(0, board.countAliveCells());
+        }
+
+    @Test
+    public void testFor3x3GridWithOneAliveCellNextGenerationWillBeAllDead() {
+        Board board = new Board(3, 3);
+        board.seedRandomCells(15, 3, 3);
+        assertEquals(1, board.countAliveCells());
+        board.nextGeneration();
+        assertEquals(0, board.countAliveCells());
+    }
+
+    @Test
+    public void testFor4x4GridWithOneAliveCellNextGenerationWillBeAllDead() {
+        Board board = new Board(4, 4);
+        board.seedRandomCells(10, 4, 4);
+        assertEquals(1, board.countAliveCells());
+        board.nextGeneration();
+        assertEquals(0, board.countAliveCells());
+    }
+
 
 }
