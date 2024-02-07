@@ -1,4 +1,4 @@
-package org.example;
+package org.example.Cell;
 
 public enum CellStatus {
     ALIVE("*"),
