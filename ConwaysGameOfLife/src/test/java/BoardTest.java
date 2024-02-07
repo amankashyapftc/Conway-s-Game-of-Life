@@ -76,14 +76,14 @@ public class BoardTest {
     }
 
 
-        @Test
-        public void testFor2x2GridWithOneAliveCellNextGenerationWillBeAllDead() {
-            Board board = new Board(2, 2);
-            board.seedRandomCells(25, 2, 2);
-            assertEquals(1, board.countAliveCells());
-            board.nextGeneration();
-            assertEquals(0, board.countAliveCells());
-        }
+    @Test
+    public void testFor2x2GridWithOneAliveCellNextGenerationWillBeAllDead() {
+        Board board = new Board(2, 2);
+        board.seedRandomCells(25, 2, 2);
+        assertEquals(1, board.countAliveCells());
+        board.nextGeneration();
+        assertEquals(0, board.countAliveCells());
+    }
 
     @Test
     public void testFor3x3GridWithOneAliveCellNextGenerationWillBeAllDead() {
