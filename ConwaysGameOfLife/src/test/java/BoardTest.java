@@ -1,4 +1,6 @@
 import org.example.Board;
+import org.example.Cell;
+import org.example.CellStatus;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

@@ -4,9 +4,7 @@ import java.util.Objects;
 import java.util.Random;
 
 public class Board {
-
     private Cell[][] grid;
-    private Cell[][] previousGrid;
 
     public Board(int rows, int cols) {
         if (rows <= 0 || cols <= 0) {
@@ -37,10 +35,10 @@ public class Board {
         for (int i = 0; i < grid.length; i++) {
             for (int j = 0; j < grid[i].length; j++) {
                 if (random.nextInt(2) == 1 && aliveCellCount > 0) {
-                    grid[i][j] = new Cell(true);
+                    grid[i][j] = new Cell(CellStatus.ALIVE,i,j);
                     aliveCellCount--;
                 }else{
-                    grid[i][j] = new Cell(false);
+                    grid[i][j] = new Cell(CellStatus.DEAD,i,j);
                 }
             }
         }
@@ -48,15 +46,13 @@ public class Board {
 
     public int countAliveCells() {
         int aliveCells = 0;
-
         for (int i = 0; i < grid.length; i++) {
             for (int j = 0; j < grid[i].length; j++) {
-                if (Objects.equals(grid[i][j], new Cell(true))) {
+                if (Objects.equals(grid[i][j], new Cell(CellStatus.ALIVE,i,j))) {
                     aliveCells++;
                 }
             }
         }
-
         return aliveCells;
     }
 
@@ -64,48 +60,22 @@ public class Board {
         Cell[][] newGrid = new Cell[grid.length][grid[0].length];
         for (int i = 0; i < grid.length; i++) {
             for (int j = 0; j < grid[i].length; j++) {
-                int aliveNeighbors = countAliveNeighbors(i, j);
-                if (grid[i][j].equals(new Cell(true))) {
-                    newGrid[i][j] = new Cell(aliveNeighbors == 2 || aliveNeighbors == 3);
-                } else {
-                    newGrid[i][j] = new Cell(aliveNeighbors == 3);
-                }
+                int aliveNeighbors = NeighbourStatus.numberOfAliveNeighbours(i,j,grid);
+                newGrid[i][j] = grid[i][j].nextGenerationState(aliveNeighbors);
             }
         }
-        previousGrid = grid.clone();
+        if(Arrays.deepEquals(newGrid, grid)){
+            throw new IllegalStateException("Reached to Stable State.");
+        }
         grid = newGrid;
     }
-
-    public boolean isSameAsPrevious() {
-        return Arrays.deepEquals(grid, previousGrid);
-    }
-
-    public int countAliveNeighbors(int row, int col) {
-        int aliveNeighbors = 0;
-        for (int i = row - 1; i <= row + 1; i++) {
-            for (int j = col - 1; j <= col + 1; j++) {
-                if (i == row && j == col) {
-                    continue;
-                }
-                if (isValidCell(i, j) && grid[i][j].equals(new Cell(true))) {
-                    aliveNeighbors++;
-                }
-            }
-        }
-        return aliveNeighbors;
-    }
-
-    private boolean isValidCell(int row, int col) {
-        return row >= 0 && row < grid.length && col >= 0 && col < grid[0].length;
-    }
-
-    public void printGrid(){
+    public void print(){
         for (int i = 0; i < grid.length; i++) {
             for (int j = 0; j < grid[i].length; j++) {
-                if(grid[i][j].equals(new Cell(true))){
-                    System.out.print('*');
+                if(grid[i][j].equals(new Cell(CellStatus.ALIVE,i,j))){
+                    System.out.print(CellStatus.ALIVE.getStateString());
                 }else{
-                    System.out.print('-');
+                    System.out.print(CellStatus.DEAD.getStateString());
                 }
             }
             System.out.println();

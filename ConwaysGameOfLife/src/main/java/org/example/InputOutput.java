@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 public class InputOutput {
 
-    public static void main(String[] args) {
+    public InputOutput() {
         Scanner scanner = new Scanner(System.in);
 
         System.out.print("Enter the number of rows: ");
@@ -20,36 +20,32 @@ public class InputOutput {
         board.seedRandomCells(seedingPercentage, rows, cols);
 
         System.out.println("Initial Generation:");
-        board.printGrid();
+        board.print();
 
-        int consecutiveSameStates = 0;
         boolean gameRunning = true;
 
         int genration = 1;
-        while (gameRunning) {
-            board.nextGeneration();
-            System.out.println("Generation " + genration++ + ":");
-            board.printGrid();
+        try {
+            while (gameRunning) {
+                board.nextGeneration();
+                System.out.println("Generation " + genration++ + ":");
+                board.print();
 
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
 
-            if (board.countAliveCells() == 0) {
-                System.out.println("All cells are dead. Game Over!");
-                gameRunning = false;
-            } else if (board.isSameAsPrevious()) {
-                consecutiveSameStates++;
-                if (consecutiveSameStates == 2) {
-                    System.out.println("Game has reached a stable state. Game Over!");
+                if (board.countAliveCells() == 0) {
+                    System.out.println("All cells are dead. Game Over!");
                     gameRunning = false;
                 }
-            } else {
-                consecutiveSameStates = 0;
             }
+        }catch (Exception ex){
+            System.out.println(ex.getMessage());
         }
+
 
         scanner.close();
     }
