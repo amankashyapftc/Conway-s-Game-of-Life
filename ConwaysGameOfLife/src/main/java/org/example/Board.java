@@ -1,6 +1,7 @@
 package org.example;
 import org.example.Cell.Cell;
 import org.example.Cell.CellStatus;
+import org.example.Cell.CellNeighboursList;
 
 import java.util.Arrays;
 import java.util.List;
@@ -64,7 +65,7 @@ public class Board {
         Cell[][] newGrid = new Cell[board.length][board[0].length];
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board[i].length; j++) {
-                List<int[]> neighboursCoordinates = new NeighboursList(i,j).validNeighboursCoordinates(board.length, board[0].length);
+                List<int[]> neighboursCoordinates = new CellNeighboursList(i,j).validNeighboursCoordinates(board.length, board[0].length);
                 List<Cell> neighbourCells = neighboursCoordinates.stream().map( coordinates -> board[coordinates[0]][coordinates[1]]).toList();
                 newGrid[i][j] = board[i][j].nextGenerationState(neighbourCells);
             }

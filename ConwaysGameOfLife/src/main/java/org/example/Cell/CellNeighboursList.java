@@ -1,12 +1,12 @@
-package org.example;
+package org.example.Cell;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class NeighboursList {
+public class CellNeighboursList {
     private final int[][] NEIGHBOURS_RELATIVE_POSITIONS;
 
-    public NeighboursList(int row, int column) {
+    public CellNeighboursList(int row, int column) {
         if(row < 0 || column < 0) {
             throw new IllegalArgumentException("Row and column must be non-negative values.");
         }
